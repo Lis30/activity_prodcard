@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.projects.activity_prodcard.adapters.PictureAdapter;
+import com.projects.activity_prodcard.adapters.ShopFragAdapter;
 import com.projects.activity_prodcard.adapters.TabAdapter;
 import com.projects.activity_prodcard.fragments.ShopFragment;
 import com.projects.activity_prodcard.repository.ApiCaller;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPager fragments;
     RecyclerView pictures;
     PictureAdapter pictureAdapter;
+    ShopFragAdapter shopFragAdapter;
 
 
     @Override
@@ -50,9 +52,8 @@ public class MainActivity extends AppCompatActivity {
     public void initTabs(){
 
         fragments = findViewById(R.id.prod_description);
-        TabAdapter adapter = new TabAdapter(getSupportFragmentManager());
+        TabAdapter adapter = new TabAdapter(this, getSupportFragmentManager());
         fragments.setAdapter(adapter);
-
         tabs = findViewById(R.id.tabLayout);
         tabs.setupWithViewPager(fragments);
 
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView heartIc = findViewById(R.id.heartIc);
         ImageView addToFavor = findViewById(R.id.prodcard_heartBtn);
         TextView title = findViewById(R.id.nameOfModel);
-        ShopFragment fragment = new ShopFragment();
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://run.mocky.io/v3/")
@@ -89,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
                     rating.setRating(resDescription.getRating());
                     title.setText(resDescription.getTitle());
                     pictureAdapter.addItems(resDescription.getImages());
+//                    shopFragAdapter.addItems(resDescription);
+//                    shopFragAdapter.addColor(resDescription.getColor());
+//                    shopFragAdapter.addCap(resDescription.getCapacity());
 
 
                     if (resDescription.getIsFavorites()){
