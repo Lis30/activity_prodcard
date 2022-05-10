@@ -60,6 +60,23 @@ public class ResDescription implements Serializable {
     String title;
 
 
+    public ResDescription(String CPU, String camera, ArrayList<String> capacity,
+                          ArrayList<String> color, int id, ArrayList<String> images, boolean isFavorites,
+                          String price, float rating, String sd, String ssd, String title) {
+        this.CPU = CPU;
+        this.camera = camera;
+        this.capacity = capacity;
+        this.color = color;
+        this.id = id;
+        this.images = images;
+        this.isFavorites = isFavorites;
+        this.price = price;
+        this.rating = rating;
+        this.sd = sd;
+        this.ssd = ssd;
+        this.title = title;
+    }
+
     public  String getCPU() {
         return CPU;
     }
@@ -74,14 +91,6 @@ public class ResDescription implements Serializable {
 
     public  ArrayList<String> getColor() {
         return color;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public ArrayList<String> getImages() {
@@ -115,7 +124,5 @@ public class ResDescription implements Serializable {
     public String getTitle() {
         return title;
     }
-
-
 
 }

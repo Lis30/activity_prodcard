@@ -10,7 +10,6 @@
         android:id="@+id/PhonePicProdcard"
         android:layout_width="240dp"
         android:layout_height="349dp"
-        android:background="@drawable/z_round_radius"
         android:elevation="20dp"
         android:scaleType="center"
         app:layout_constraintEnd_toEndOf="parent"

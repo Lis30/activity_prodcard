@@ -7,15 +7,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatRatingBar;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.projects.activity_prodcard.adapters.PictureAdapter;
-import com.projects.activity_prodcard.adapters.ShopFragAdapter;
 import com.projects.activity_prodcard.adapters.TabAdapter;
-import com.projects.activity_prodcard.fragments.ShopFragment;
+import com.projects.activity_prodcard.viewModel.ShopData;
 import com.projects.activity_prodcard.repository.ApiCaller;
 import com.projects.activity_prodcard.repository.ResDescription;
 
@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPager fragments;
     RecyclerView pictures;
     PictureAdapter pictureAdapter;
-    ShopFragAdapter shopFragAdapter;
-
+    ShopData shopData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         GetData();
         initTabs();
+
 
     }
 
@@ -59,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
     public void GetData(){
 
         TextView price = findViewById(R.id.prodcard_price);
@@ -68,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         ImageView heartIc = findViewById(R.id.heartIc);
         ImageView addToFavor = findViewById(R.id.prodcard_heartBtn);
         TextView title = findViewById(R.id.nameOfModel);
+
+        shopData = new ViewModelProvider(this).get(ShopData.class);
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -90,9 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     rating.setRating(resDescription.getRating());
                     title.setText(resDescription.getTitle());
                     pictureAdapter.addItems(resDescription.getImages());
-//                    shopFragAdapter.addItems(resDescription);
-//                    shopFragAdapter.addColor(resDescription.getColor());
-//                    shopFragAdapter.addCap(resDescription.getCapacity());
+                    shopData.setData(resDescription);
 
 
                     if (resDescription.getIsFavorites()){
@@ -120,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         SetPicSettings();
+
     }
 
     public void SetPicSettings() {
@@ -130,4 +129,6 @@ public class MainActivity extends AppCompatActivity {
         pictureAdapter = new PictureAdapter(this);
         pictures.setAdapter(pictureAdapter);
     }
+
+
 }

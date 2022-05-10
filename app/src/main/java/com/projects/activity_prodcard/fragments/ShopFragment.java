@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import android.widget.Button;
+import android.widget.TextView;
+
 import androidx.lifecycle.ViewModelProvider;
+
 import com.projects.activity_prodcard.R;
-import com.projects.activity_prodcard.adapters.ShopFragAdapter;
-import com.projects.activity_prodcard.model.FragViewModel;
-import com.projects.activity_prodcard.repository.ResDescription;
+import com.projects.activity_prodcard.viewModel.ShopData;
 
 
 public class ShopFragment extends CommonFragUnits {
@@ -22,9 +21,6 @@ public class ShopFragment extends CommonFragUnits {
 
     public static ShopFragment getInstance(Context context) {
         ShopFragment shopFragment = new ShopFragment();
-        Bundle args = new Bundle();
-
-        shopFragment.setArguments(args);
         shopFragment.setContext(context);
         shopFragment.setTitle(context.getString(R.string.tab_shop));
         return shopFragment;
@@ -34,20 +30,32 @@ public class ShopFragment extends CommonFragUnits {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(LAYOUT, container, false);
-        Bundle bundle = getArguments();
-
-        return view;
+         return view;
     }
 
-
-    public void  onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+    public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        FragViewModel viewModel = new ViewModelProvider(requireActivity()).get(FragViewModel.class);
-        ResDescription resDescription = new ResDescription();
 
-        ShopFragAdapter adapter = new ShopFragAdapter(resDescription);
+        TextView chipTxt = view.findViewById(R.id.chipTxt);
+        TextView  cameratxt = view.findViewById(R.id.cameratxt);
+        TextView  memoryTxt = view.findViewById(R.id.memoryTxt);
+        TextView  sdCardXtx = view.findViewById(R.id.sdCardTxt);
+        Button colorBtn1 = view.findViewById(R.id.button);
+        Button colorBtn2 = view.findViewById(R.id.button2);
+        TextView  capacity1 = view.findViewById(R.id.first_cap);
+        TextView  capacity2 = view.findViewById(R.id.second_cap);
 
-
+        ShopData shopData = new ViewModelProvider(requireActivity()).get(ShopData.class);
+        shopData.getData().observe(getViewLifecycleOwner(), resDescription -> {
+            chipTxt.setText(resDescription.getCPU());
+            cameratxt.setText(resDescription.getCamera());
+            memoryTxt.setText(resDescription.getSsd());
+            sdCardXtx.setText(resDescription.getSd());
+            capacity1.setText(resDescription.getCapacity().get(0));
+            capacity2.setText(resDescription.getCapacity().get(1));
+//            colorBtn1.setBackgroundColor(Integer.parseInt(resDescription.getColor().get(0)));
+//            colorBtn2.setBackgroundColor(Integer.parseInt(resDescription.getColor().get(1)));
+        });
 
     }
 
