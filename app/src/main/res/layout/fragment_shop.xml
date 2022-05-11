@@ -70,7 +70,7 @@
             android:id="@+id/chipTxt"
             android:layout_width="wrap_content"
             android:layout_height="14dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="4dp"
             android:text="@string/none"
             android:textSize="11sp"
@@ -82,10 +82,12 @@
             android:id="@+id/cameratxt"
             android:layout_width="wrap_content"
             android:layout_height="14dp"
-            android:layout_marginStart="72dp"
+            android:layout_marginStart="36dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="46dp"
             android:text="@string/none"
             android:textSize="11sp"
+            app:layout_constraintEnd_toStartOf="@+id/memoryTxt"
             app:layout_constraintStart_toEndOf="@+id/chipTxt"
             app:layout_constraintTop_toBottomOf="@+id/cameraIc" />
 
@@ -93,13 +95,14 @@
             android:id="@+id/memoryTxt"
             android:layout_width="wrap_content"
             android:layout_height="14dp"
-            android:layout_marginStart="72dp"
+            android:layout_marginStart="46dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="60dp"
             android:text="@string/none"
             android:textSize="11sp"
+            app:layout_constraintEnd_toStartOf="@+id/sdCardTxt"
             app:layout_constraintStart_toEndOf="@+id/cameratxt"
-            app:layout_constraintTop_toBottomOf="@+id/memoryIc"
-           />
+            app:layout_constraintTop_toBottomOf="@+id/memoryIc" />
 
         <TextView
             android:id="@+id/sdCardTxt"
@@ -110,8 +113,7 @@
             android:text="@string/none"
             android:textSize="11sp"
             app:layout_constraintStart_toEndOf="@+id/memoryTxt"
-            app:layout_constraintTop_toBottomOf="@+id/sdCardIc"
-             />
+            app:layout_constraintTop_toBottomOf="@+id/sdCardIc" />
 
         <TextView
             android:id="@+id/selecttxt"
@@ -136,13 +138,12 @@
             app:layout_constraintTop_toBottomOf="@+id/selecttxt"
             tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-        <Button
+        <TextView
             android:id="@+id/button"
             android:layout_width="39dp"
             android:layout_height="39dp"
             android:layout_marginStart="35dp"
             android:layout_marginTop="17dp"
-            android:background="@color/brown"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/selecttxt"
             tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />

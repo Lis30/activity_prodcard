@@ -1,6 +1,9 @@
 package com.projects.activity_prodcard.fragments;
 
 import android.content.Context;
+import android.graphics.BlendMode;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.projects.activity_prodcard.R;
@@ -33,6 +37,7 @@ public class ShopFragment extends CommonFragUnits {
          return view;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
@@ -40,7 +45,7 @@ public class ShopFragment extends CommonFragUnits {
         TextView  cameratxt = view.findViewById(R.id.cameratxt);
         TextView  memoryTxt = view.findViewById(R.id.memoryTxt);
         TextView  sdCardXtx = view.findViewById(R.id.sdCardTxt);
-        Button colorBtn1 = view.findViewById(R.id.button);
+        TextView colorBtn1 = view.findViewById(R.id.button);
         Button colorBtn2 = view.findViewById(R.id.button2);
         TextView  capacity1 = view.findViewById(R.id.first_cap);
         TextView  capacity2 = view.findViewById(R.id.second_cap);
@@ -51,10 +56,10 @@ public class ShopFragment extends CommonFragUnits {
             cameratxt.setText(resDescription.getCamera());
             memoryTxt.setText(resDescription.getSsd());
             sdCardXtx.setText(resDescription.getSd());
-            capacity1.setText(resDescription.getCapacity().get(0));
-            capacity2.setText(resDescription.getCapacity().get(1));
-//            colorBtn1.setBackgroundColor(Integer.parseInt(resDescription.getColor().get(0)));
-//            colorBtn2.setBackgroundColor(Integer.parseInt(resDescription.getColor().get(1)));
+            capacity1.setText(resDescription.getCapacity().get(0) + "  GB");
+            capacity2.setText(resDescription.getCapacity().get(1) + "  GB");
+            colorBtn1.setBackgroundColor(Color.parseColor(resDescription.getColor().get(0)));
+            colorBtn2.setBackgroundColor(Color.parseColor(resDescription.getColor().get(1)));
         });
 
     }
